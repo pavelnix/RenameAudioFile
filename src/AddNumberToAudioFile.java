@@ -5,27 +5,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Administrator on 01.04.2016.
+ * Аргументом программы является файл вида
+ * 1 qwert.
+ * 2 ncjdfv.
+ * Программа считывает строку из файла, ищет в каталоге файл (qwert. + .mp3) и
+ * переименовывает его в 001 qwert..mp3
  */
-public class RenameAudioFile {
+
+/**
+ * Todo
+ * добавить логирование какие файлы были переименованы а какие нет.
+ */
+
+public class AddNumberToAudioFile {
 
     public static void main(String[] args) throws FileNotFoundException {
-
         Scanner scanner = new Scanner(new File(args[0]));
-
-        File[] filesList;
-        File filesPath = new File("."); // создаем объект на папку с файлами
-        filesList = filesPath.listFiles(); // записываем файлы из папки в массив объектов типа File
-        for(File file : filesList){
-            String str = file.getName();
-            if( (str.endsWith(".mp3") && (!str.endsWith("..mp3")))){
-                    System.out.println(str);
-                str = str.replaceFirst(".mp3", "..mp3");
-                file.renameTo(new File(str));
-            }
-        }
-
-        while (scanner.hasNext()){
+       while (scanner.hasNext()){
             int number = scanner.nextInt();
             System.out.println(number);
             scanner.skip(Pattern.compile("([ ]+)"));
@@ -39,7 +35,6 @@ public class RenameAudioFile {
             else{
                 System.out.println("File not found!");
             }
-
             System.out.println();
         }
     }
